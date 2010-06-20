@@ -1,34 +1,40 @@
 html, body {
-	font-family: verdana, arial, sans-serif;
+	font-family: arial, sans-serif;
 	margin: 0;
 	padding: 0;
 }
 
+h1 {
+	font-size: 400%;
+	margin: 0;
+	padding: 0;
+	}
 a {
 	color: black;
 	}
 #page-container {
-	    background: red;
+	  
+	    width: 760px;
+	    margin: auto;
 	}
 	
 #nav {
-	background: blue;
+
 	float: left;
-	
 	clear: both;
+	margin-right: 25px;
 }
 
 #content {
-	background: green;
-	margin-left: 175px;
+	margin-left: 195px;
+
 
 }
 
 #header {
-	background: yellow;
 
 }
 
 #footer {
-	background: orange;
+	margin: 10px;
 }

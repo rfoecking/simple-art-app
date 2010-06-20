@@ -38,7 +38,7 @@ class DAO {
 	function getAllSketches() {
 
 		$stmt = $this->db->prepare(
-			"select * from picture where sketch = 1"
+			"select * from picture where sketch = 1 order by id desc"
 		) or print_r("FUCK ERROR".$stmt.errorInfo()) &&die();
 
 		$stmt->execute();
@@ -50,11 +50,71 @@ class DAO {
 	function getAllFinishedWorks() {
 
 		$stmt = $this->db->prepare(
-			"select * from picture where sketch = 0"
+			"select * from picture where sketch = 0 order by id desc"
 		) or print_r("FUCK ERROR".$stmt.errorInfo()) &&die();
 
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+	/**
+	 * Get a picture with the specified id.
+	 * @param unknown_type $id
+	 */
+	function getPicture($id){
+		$stmt = $this->db->prepare(
+			"select name, description, filename_full, id, sketch from picture
+			 where id = :id"
+			 );
+			 $stmt->bindValue(":id",$id);
+			 $stmt->execute();
+			 return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+	/**
+	 * Get the id of the picture before the current one.
+	 * @param $id
+	 */
+	function getNext($id, $sketch){
+		$stmt = $this->db->prepare("
+		select max(id)
+		from picture where id < :id AND sketch = :sketch"
+		);
+		$stmt->bindValue(":id",$id);
+		$stmt->bindValue(":sketch",$sketch);
+		$stmt->execute();
+		$result =  $stmt->fetch(PDO::FETCH_ASSOC);
+		return $this->getPicture($result["max(id)"]);
+	}
+	/**
+	 * Get the id of the picture before the current one.
+	 * @param $id
+	 */
+	function getPrevious($id,$sketch){
+		$stmt = $this->db->prepare("
+		select min(id)
+		from picture where id > :id AND sketch = :sketch"
+		);
+		$stmt->bindValue(":id",$id);
+		$stmt->bindValue(":sketch",$sketch);
+		$stmt->execute();
+		$result =  $stmt->fetch(PDO::FETCH_ASSOC);
+		return $this->getPicture($result["min(id)"]);
+	}
+	
+	function getNewestId($sketch){
+		$stmt = $this->db->prepare(
+		"SELECT id FROM picture WHERE sketch = :sketch ORDER BY id  DESC LIMIT 1");
+		$stmt->bindValue(":sketch",$sketch);
+		$stmt->execute();
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $result["id"];
+	}
+	function getOldestId($sketch){
+		$stmt = $this->db->prepare(
+		"SELECT id FROM picture WHERE id != 0 AND sketch = :sketch ORDER BY id ASC LIMIT 1");
+		$stmt->bindValue(":sketch",$sketch);
+		$stmt->execute();
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $result["id"];
 	}
 	/**
 	 * Upload a picture and adds an update to the posts table about that 
@@ -92,7 +152,8 @@ class DAO {
 			 picture.filename_full, post.picture, post.datetime
 			 from post
 			 join picture
-             on post.picture_id = picture.id"	
+             on post.picture_id = picture.id
+             order by post.datetime desc"	
 		) or print_r("FUCK ERROR".$stmt.errorInfo()) &&die();
 
 		$stmt->execute();
@@ -133,6 +194,6 @@ class DAO {
 		else
 			return false;
 	}
-}
 
+}
 ?>

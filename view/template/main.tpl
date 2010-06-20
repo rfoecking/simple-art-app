@@ -8,7 +8,7 @@
 		<p>Posted on: {$post.datetime}</p>
 	</li>
 	{else}
-	<li>Leroy posted a new artwork at {$post.datetime} ..
+	<li>leroy posted a new artwork at {$post.datetime} ..
 		<p>{$post.title}, {$post.content}</p>
 		<p><a href="../uploads/{$post.filename_full}"><img src="../uploads/{$post.filename_thumb}"></a></p>
 	</li>

@@ -5,7 +5,7 @@
 	</head>
 	<body>
 	<div id="page-container">
-	<div id="header"><h2>Leroy's Awesome Art and Shit </h2></div>
+	<div id="header"><h1>leroy van vliet</h1></div>
 	<div id="nav">
 		<ul class="links">
 			<li><a href="main" title="Home">Home</a></li> 

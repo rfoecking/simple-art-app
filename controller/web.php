@@ -54,6 +54,27 @@ function webController($path, $request) {
 				$smarty->assign("pictures",$pictures);
 				$smarty->display('finished_works.tpl');
 				break;
+			case 'view':
+				$id = $request["id"];
+				$sketch = $request["sketch"];
+				if($id == $dao->getOldestId($sketch)) {
+					$smarty->assign("oldest",1);
+					$previous = $dao->getPrevious($id,$sketch);
+					$smarty->assign("previousId",$previous["id"]);
+				} else if ($id == $dao->getNewestId($sketch)) {
+					$smarty->assign("newest",1);
+					$next = $dao->getNext($id,$sketch);
+					$smarty->assign("nextId",$next["id"]);
+				} else {
+					$next = $dao->getNext($id,$sketch);
+				 	$previous = $dao->getPrevious($id,$sketch);
+				 	$smarty->assign("nextId",$next["id"]);
+				 	$smarty->assign("previousId",$previous["id"]);
+				}		
+				$picture = $dao->getPicture($id);
+				$smarty->assign("picture",$picture);
+				$smarty->display("view.tpl");
+				break;
 	}
 	// Only if the user is logged in
 	if( $authnStatus != AUTHN_FAILED) {
