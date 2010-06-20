@@ -57,7 +57,8 @@ class DAO {
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 	/**
-	 * Upload a picture.
+	 * Upload a picture and adds an update to the posts table about that 
+	 * picture.
 	 */
 	function uploadPicture($name, $description, $fileNameFull, $fileNameThumb, $isSketch) {
 		$stmt = $this->db->prepare(
@@ -70,13 +71,28 @@ class DAO {
 			   $stmt->bindValue(":fileNameThumb", $fileNameThumb);
 			   $stmt->bindValue(":isSketch", $isSketch);
 			   $stmt->execute() or print_r($stmt->errorInfo());
+			   
+		$stmt = $this->db->prepare(
+				"insert into post (title, content, user_id, datetime, picture, picture_id) 
+				 values (:title, :content, 2, NOW(), 1, :pictureId)"
+				 )or print_r($stmt->errorInfo()&&die());
+				 $stmt->bindValue(":title", $name);
+				 $stmt->bindValue(":content", $description);
+				 $stmt->bindValue(":pictureId", $this->db->lastInsertId());
+		$stmt->execute()or print_r($stmt->errorInfo()&&die());
+				 
 	}
 	/**
 	 * Get all posts in the database.
+	 * TODO:  Figure out a better database design for this.
 	 */
 	function getAllPosts() {
 		$stmt = $this->db->prepare(
-			"select * from post"
+			"select post.title, post.content, picture.filename_thumb,
+			 picture.filename_full, post.picture, post.datetime
+			 from post
+			 join picture
+             on post.picture_id = picture.id"	
 		) or print_r("FUCK ERROR".$stmt.errorInfo()) &&die();
 
 		$stmt->execute();
@@ -87,7 +103,8 @@ class DAO {
 	 */
 	function newPost($title,$content) {
 		$stmt = $this->db->prepare(
-			"insert into post (title, content, user_id, time) values (:title, :content, 2, NOW())"
+			"insert into post (title, content, user_id, datetime, picture, picture_id)
+			 values (:title, :content, 2, NOW(), 0,0)"
 		) or print_r("FUCK ERROR".$stmt.errorInfo()) &&die();
 		
 		$stmt->bindValue(":title", $title);

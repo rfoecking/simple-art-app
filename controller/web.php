@@ -17,10 +17,15 @@ function webController($path, $request) {
 	// Can do this stuff whether or not they are logged in
 	switch($action) {
 			case 'main':
+				$posts = $dao->getAllPosts();
+				$smarty->assign("posts",$posts);
 				$smarty->display('main.tpl');
 				break;
 			case '404':
 				$smarty->display('404.tpl');
+				break;
+			case 'contact':
+				$smarty->display("contact.tpl");
 				break;
 			case 'login':
 				$smarty->display('header.tpl');
@@ -70,7 +75,8 @@ function webController($path, $request) {
 				$name = $request['name'];
 				$description = $request['description'];
 				$isSketch = $request['isSketch'];
-
+				if(!isset($isSketch)) $isSketch = 0;
+				
 				// We know there will only be two files, a thumbnail and a full size image
 				$fileNameFull =  $_FILES['image']['name'][0];
 				$fileNameThumb =  $_FILES['image']['name'][1];

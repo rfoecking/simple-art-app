@@ -4,7 +4,7 @@
 <input type="text" name="title" size="30">
 </p>
 <p>Content:</p>
-<textarea rows="10" cols="30" name="content">Type your shit here.. </textarea>
+<textarea rows="10" cols="30" name="content">Type stuff... </textarea>
 
 <input type="submit" value="Submit">
 </div>
