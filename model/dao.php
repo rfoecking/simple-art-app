@@ -120,13 +120,13 @@ class DAO {
 	 * Upload a picture and adds an update to the posts table about that 
 	 * picture.
 	 */
-	function uploadPicture($name, $description, $fileNameFull, $fileNameThumb, $isSketch) {
+	function uploadPicture($name, $gallery, $newsfeed, $fileNameFull, $fileNameThumb, $isSketch) {
 		$stmt = $this->db->prepare(
 		"insert into picture (name, description, datetime, filename_full, filename_thumb, sketch)
 			   VALUES (:name, :description, NOW(), :fileNameFull, :fileNameThumb, :isSketch)"
 			   )or print_r("ERROR".$this->db->errorInfo()) &&die();
 			   $stmt->bindValue(":name", $name);
-			   $stmt->bindValue(":description", $description);
+			   $stmt->bindValue(":description", $gallery);
 			   $stmt->bindValue(":fileNameFull", $fileNameFull);
 			   $stmt->bindValue(":fileNameThumb", $fileNameThumb);
 			   $stmt->bindValue(":isSketch", $isSketch);
@@ -137,7 +137,7 @@ class DAO {
 				 values (:title, :content, 2, NOW(), 1, :pictureId)"
 				 )or print_r($stmt->errorInfo()&&die());
 				 $stmt->bindValue(":title", $name);
-				 $stmt->bindValue(":content", $description);
+				 $stmt->bindValue(":content", $newsfeed);
 				 $stmt->bindValue(":pictureId", $this->db->lastInsertId());
 		$stmt->execute()or print_r($stmt->errorInfo()&&die());
 				 
@@ -149,7 +149,8 @@ class DAO {
 	function getAllPosts() {
 		$stmt = $this->db->prepare(
 			"select post.title, post.content, picture.filename_thumb,
-			 picture.filename_full, post.picture, post.datetime
+			 picture.filename_full, post.picture, post.datetime, post.picture_id,
+			 picture.sketch
 			 from post
 			 join picture
              on post.picture_id = picture.id

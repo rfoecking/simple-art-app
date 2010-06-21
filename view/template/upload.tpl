@@ -3,8 +3,11 @@
 <p>Name:</p>
 <input type="text" name="name" size="30">
 </p>
-<p>Description:</p>
-<input type="text" name="description" size="30">
+<p>Gallery description:</p>
+<textarea rows="10" cols="30" name="gallery">Type stuff... </textarea>
+</p>
+<p>News feed description:</p>
+<textarea rows="10" cols="30" name="newsfeed">Type stuff... </textarea>
 </p>
 <p>Full image: </p>
 <input name="image[]" type="file" />

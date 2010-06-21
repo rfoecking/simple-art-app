@@ -7,7 +7,7 @@
 	{if $destination}
 	<input type="hidden" name="loginDestination" value="{$destination}"/>
 	{/if}
-	<label for="email">Email address:</label><br/>
+	<label for="email">Username:</label><br/>
 	<input type="text" id="email" name="loginEmail"/><br/>
 	<label for="pass">Password:</label><br/>
 	<input type="password" id="pass" name="loginPass"/><br/>

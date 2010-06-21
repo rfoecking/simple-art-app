@@ -87,14 +87,15 @@ function webController($path, $request) {
 				$title=$request["title"];
 				$content=$request["content"];
 				$dao->newPost($title,$content);
-				header("Location: posts");
+				header("Location: main");
 				break;
 			case 'upload':
 				$smarty->display('upload.tpl');
 				break;
 			case 'upload.do':
 				$name = $request['name'];
-				$description = $request['description'];
+				$gallery = $request['gallery'];
+				$newsfeed =$request['newsfeed'];
 				$isSketch = $request['isSketch'];
 				if(!isset($isSketch)) $isSketch = 0;
 				
@@ -108,7 +109,7 @@ function webController($path, $request) {
 				$targetPath = "uploads/" . $fileNameThumb;
 				move_uploaded_file($_FILES['image']['tmp_name'][1], $targetPath);
 				
-				$dao->uploadPicture($name,$description, $fileNameFull, $fileNameThumb, $isSketch);
+				$dao->uploadPicture($name,$gallery, $newsfeed, $fileNameFull, $fileNameThumb, $isSketch);
 				if ($isSketch) header("Location: sketches");
 				else header("Location: finished_work");
 				break;

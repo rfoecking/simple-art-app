@@ -8,16 +8,16 @@
 	<div id="header"><h1>leroy van vliet</h1></div>
 	<div id="nav">
 		<ul class="links">
-			<li><a href="main" title="Home">Home</a></li> 
-			<li><a href="finished_work" title="Gallery">Finished Work</a></li>
-			<li><a href="sketches" title="Gallery">Sketches</a></li> 
-			<li><a href="contact" title="About">About/Contact</a></li>
+			<li><a href="main" title="Home">home</a></li> 
+			<li><a href="finished_work" title="Gallery">finished work</a></li>
+			<li><a href="sketches" title="Gallery">sketches</a></li> 
+			<li><a href="contact" title="About">about/contact</a></li>
 			{if $loggedIn}
-			<li><a href="upload" title="Upload">Upload (leroy only)</a></li> 
-			<li><a href="post" title="Post">Post(leroy only)</a></li> 
-			<li><a href="logout" title="Logout">Logout</a></li> 
+			<li><a href="upload" title="Upload">upload</a></li> 
+			<li><a href="post" title="Post">post</a></li> 
+			<li><a href="logout" title="Logout">logout</a></li> 
 			{else}
-			<li><a href="login" title="Login">Login (leroy only)</a></li>
+			<li><a href="login" title="Login">login</a></li>
 			{/if}
 		</ul>		
 		</div>

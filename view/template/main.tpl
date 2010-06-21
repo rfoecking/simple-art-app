@@ -1,18 +1,18 @@
 {include file="header.tpl" title="LEROY!"}
-<h2>Welcome to LEROY!</h2>
-<ul>
+<h2>new artwork</h2>
+<div id="post">
 {foreach from=$posts item=post}
+
 	{if $post.picture == 0}
-	<li><p>Title: {$post.title}</p>
-		<p>Content: {$post.content}</p>
-		<p>Posted on: {$post.datetime}</p>
-	</li>
+	<span class="title">{$post.title}</span><span class="datetime">posted {$post.datetime} by leroy</span>
+		<p class="content">{$post.content}</p>
 	{else}
-	<li>leroy posted a new artwork at {$post.datetime} ..
-		<p>{$post.title}, {$post.content}</p>
-		<p><a href="../uploads/{$post.filename_full}"><img src="../uploads/{$post.filename_thumb}"></a></p>
-	</li>
+	<p class="update">leroy posted a new artwork on {$post.datetime} ... </p>
+		<p><a href="view?id={$post.picture_id}&sketch={$post.sketch}"><img src="../uploads/{$post.filename_thumb}"></a></p>
+			<span class="update-title">{$post.title}</span> - <span class="update-content">{$post.content}</span>
 	{/if}
+	<hr>
 {/foreach}
-</ul>
+</div>
+
 {include file="footer.tpl}

@@ -1,6 +1,6 @@
 {include file="header.tpl" title="LEROY!"}
-<h2> I am simply Leroy.. </h2>
-<p> You may contact me at my AIM screename asleepygoat.</p>
+<h2>about/contact </h2>
+You may contact me at my AIM screename asleepygoat.
 
 
 

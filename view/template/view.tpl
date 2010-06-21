@@ -1,11 +1,11 @@
 {include file="header.tpl"}
 {if $newest == 1}
-<p>< back
+<p>
 {else}
 <p><a href="view?id={$previousId}&sketch={$picture.sketch}">< back</a> 
 {/if}
 {if $oldest == 1}
-next > </p>
+</p>
 {else}
 <a href="view?id={$nextId}&sketch={$picture.sketch}">next ></a></p>
 {/if}

@@ -1,16 +1,35 @@
 html, body {
-	font-family: arial, sans-serif;
+	font-family: helvetica, arial, sans-serif;
 	margin: 0;
 	padding: 0;
 }
 
 h1 {
-	font-size: 400%;
+	font-size: 500%;
 	margin: 0;
+	padding: 0;
+	}
+h2 {
+	color: orange;
+	margin:0;
 	padding: 0;
 	}
 a {
 	color: black;
+	text-decoration: none;
+	}
+a:hover {
+	color: orange;
+	}
+img {
+  border: none;
+}
+p {
+	padding: 0;
+	margin: 15px;
+	}
+hr {
+	margin:15px;
 	}
 #page-container {
 	  
@@ -24,17 +43,66 @@ a {
 	clear: both;
 	margin-right: 25px;
 }
-
-#content {
-	margin-left: 195px;
-
-
+#nav li {
+	list-style-type:none;
 }
-
+#content {
+	margin-left: 155px;
+}
+#content li {
+	list-style-type:none; 
+}
 #header {
 
 }
 
 #footer {
 	margin: 10px;
+}
+#post {
+ background: #EDEDED;
+ margin: 10px;
+ padding: 10px;
+ border-top-style:dotted;
+ border-bottom-style:dotted;
+ border-width:1px;
+}
+p.title {
+	font-weight: bold;
+	color: black;
+	margin: 15px;
+}
+p.content {
+	color: #333333;
+}
+p.datetime {
+	font-weight: bold;
+	color: gray;
+}
+p.update {
+	font-style: italic;
+	color: gray;
+}
+span.update-title {
+	font-weight: bold;
+	color: black;
+	margin: 10px;
+}
+span.update-content {
+	color: #333333;
+}
+#finished {
+	background: #EDEDED;
+ 	padding: 4px;
+}
+
+span.datetime {
+	font-style: italic;
+	color: gray;
+}
+
+span.title {
+	font-weight: bold;
+	color: black;
+	margin: 15px;
 }
